@@ -1,16 +1,16 @@
 import dotenv from "dotenv";
-dotenv.config(); // Load environment variables
+dotenv.config();
 
 import express from "express";
 import cors from "cors";
-import connectDB from "./configs/mongodb.js"; // ✅ Corrected import
+import connectDB from "./configs/mongodb.js";
+import userRouter from "./routes/userRoutes.js";
 
 const port = process.env.PORT || 4000;
 const app = express();
 
-// Define an async function for server setup
 const startServer = async () => {
-  await connectDB(); // ✅ Ensure MongoDB connects properly
+  await connectDB();
 
   app.use(express.json());
   app.use(cors());
@@ -19,10 +19,11 @@ const startServer = async () => {
     res.send("API working!");
   });
 
+  app.use("/api/user", userRouter);
+
   app.listen(port, () => {
     console.log(`🚀 Server is running on port ${port}`);
   });
 };
 
-// ✅ Call the function only after it's defined
 startServer();
