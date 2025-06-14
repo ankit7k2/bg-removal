@@ -12,6 +12,9 @@ const app = express();
 const startServer = async () => {
   await connectDB();
 
+  // 👇 This must come before express.json() to handle raw webhook body
+  app.use("/api/user/webhooks", express.raw({ type: "*/*" }));
+
   app.use(express.json());
   app.use(cors());
 
