@@ -4,10 +4,13 @@ import multer from "multer";
 import fs from "fs";
 import path from "path";
 
-const uploadDir = path.join(process.cwd(), "uploads");
+// Use Vercel-compatible writable directory
+const uploadDir = path.join("/tmp", "uploads");
+
+// Ensure the /tmp/uploads directory exists
 if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir);
-  console.log("📁 Created uploads directory");
+  fs.mkdirSync(uploadDir, { recursive: true });
+  console.log("📁 Created /tmp/uploads directory");
 }
 
 const storage = multer.diskStorage({
