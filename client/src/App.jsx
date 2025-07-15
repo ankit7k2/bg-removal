@@ -5,28 +5,21 @@ import Result from './pages/Result';
 import BuyCredit from './pages/BuyCredit';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-// import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // ✅ Needed for styles
 
 const App = () => {
   return (
-    <div className='min-h-screen bg-gray-100'>
+    <div className="min-h-screen bg-gray-100 flex flex-col">
+      <ToastContainer position="bottom-right" />
       <Navbar />
-      
-      {/* Authentication Buttons */}
-      {/* <SignedIn>
-        <UserButton />
-      </SignedIn>
-      <SignedOut>
-        <SignInButton />
-      </SignedOut> */}
-
-      {/* Routes */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/result" element={<Result />} />
-        <Route path="/buy" element={<BuyCredit />} />
-      </Routes>
-
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/result" element={<Result />} />
+          <Route path="/buy" element={<BuyCredit />} />
+        </Routes>
+      </main>
       <Footer />
     </div>
   );
